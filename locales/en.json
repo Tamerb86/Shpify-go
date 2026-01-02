@@ -13,7 +13,9 @@
     "cart": "Cart",
     "account": "Account",
     "menu": "Menu",
-    "close": "Close"
+    "close": "Close",
+    "home": "Home",
+    "products": "Products"
   },
   "home": {
     "hero_title": "Power Your Life Wirelessly",

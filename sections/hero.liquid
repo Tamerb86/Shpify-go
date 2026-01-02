@@ -1,13 +1,15 @@
 {% stylesheet %}
   .hero {
     position: relative;
-    height: 600px;
+    min-height: 450px;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, {{ settings.primary_color }}, {{ settings.secondary_color }});
     color: white;
     overflow: hidden;
+    padding: 3rem 2rem;
   }
 
   .hero-image {
@@ -60,7 +62,8 @@
 
   @media (max-width: 768px) {
     .hero {
-      height: 400px;
+      min-height: 350px;
+      padding: 2rem 1rem;
     }
 
     .hero-title {
