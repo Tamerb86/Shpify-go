@@ -1,0 +1,171 @@
+{% stylesheet %}
+  .featured-products {
+    padding: 3rem 2rem;
+    background: {{ settings.background_color }};
+  }
+
+  .featured-products-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .featured-products-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: {{ settings.text_color }};
+    margin-bottom: 1rem;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+  }
+
+  .product-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+  }
+
+  .product-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    background: #f3f4f6;
+  }
+
+  .product-info {
+    padding: 1.5rem;
+  }
+
+  .product-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: {{ settings.text_color }};
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .product-price {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: {{ settings.primary_color }};
+    margin-bottom: 1rem;
+  }
+
+  .product-btn {
+    width: 100%;
+    background: {{ settings.primary_color }};
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+
+  .product-btn:hover {
+    background: {{ settings.secondary_color }};
+  }
+
+  .view-all-btn {
+    display: inline-block;
+    margin-top: 2rem;
+    background: {{ settings.primary_color }};
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+
+  .view-all-btn:hover {
+    background: {{ settings.secondary_color }};
+  }
+
+  @media (max-width: 768px) {
+    .featured-products {
+      padding: 2rem 1rem;
+    }
+
+    .featured-products-title {
+      font-size: 1.75rem;
+    }
+
+    .products-grid {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+  }
+{% endstylesheet %}
+
+<section class="featured-products">
+  <div class="featured-products-header">
+    <h2 class="featured-products-title">{{ section.settings.title }}</h2>
+  </div>
+
+  <div class="products-grid">
+    {% for product in collections[section.settings.collection].products limit: section.settings.products_count %}
+      <div class="product-card">
+        <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.title }}" class="product-image" loading="lazy">
+        <div class="product-info">
+          <h3 class="product-title">{{ product.title }}</h3>
+          <p class="product-price">{{ product.price | money }}</p>
+          <form method="post" action="/cart/add">
+            <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+            <button type="submit" class="product-btn">{{ 'product.add_to_cart' | t }}</button>
+          </form>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div style="text-align: center;">
+    <a href="/collections/all" class="view-all-btn">{{ 'home.shop_all' | t }}</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Featured Products"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_count",
+      "label": "Number of Products",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,74 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content"
+    },
+    "meta": {
+      "tags": "Tags",
+      "page": "Page"
+    }
+  },
+  "header": {
+    "search": "Search",
+    "cart": "Cart",
+    "account": "Account",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "home": {
+    "hero_title": "Power Your Life Wirelessly",
+    "hero_subtitle": "Experience the future of charging with our premium wireless chargers",
+    "featured_products": "Featured Products",
+    "shop_all": "Shop All",
+    "view_details": "View Details"
+  },
+  "product": {
+    "add_to_cart": "Add to Cart",
+    "out_of_stock": "Out of Stock",
+    "in_stock": "In Stock",
+    "quantity": "Quantity",
+    "price": "Price",
+    "description": "Description",
+    "specifications": "Specifications",
+    "reviews": "Reviews",
+    "bundle_save": "Save {{ amount }}%",
+    "buy_bundle": "Buy {{ quantity }} and Save {{ percent }}%",
+    "urgency_message": "Only {{ count }} left in stock",
+    "free_shipping_message": "Spend {{ amount }} more for free shipping"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "tax": "Tax",
+    "total": "Total",
+    "checkout": "Checkout",
+    "continue_shopping": "Continue Shopping",
+    "remove": "Remove",
+    "quantity": "Quantity",
+    "free_shipping_threshold": "Free shipping on orders over {{ amount }}"
+  },
+  "footer": {
+    "about": "About",
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "returns": "Returns",
+    "shipping": "Shipping Policy",
+    "faq": "FAQ",
+    "newsletter": "Subscribe to our newsletter",
+    "follow_us": "Follow us"
+  },
+  "newsletter": {
+    "title": "Don't Miss Out!",
+    "subtitle": "Subscribe to get special offers and updates",
+    "email_placeholder": "Enter your email",
+    "subscribe": "Subscribe",
+    "discount_message": "Get {{ percent }}% off with code: {{ code }}"
+  },
+  "errors": {
+    "404": "Page not found",
+    "404_message": "The page you're looking for doesn't exist"
+  }
+}

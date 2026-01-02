@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="{{ shop.locale }}" dir="{% if shop.locale == 'ar' %}rtl{% else %}ltr{% endif %}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="{{ settings.primary_color }}">
+    
+    <title>
+      {% if page_title %}
+        {{ page_title }}{% unless page.title == shop.name %} | {{ shop.name }}{% endunless %}
+      {% else %}
+        {{ shop.name }}
+      {% endif %}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="preconnect" href="https://cdn.shopify.com">
+    <link rel="dns-prefetch" href="https://cdn.shopify.com">
+
+    <!-- Favicon -->
+    {% if shop.favicon %}
+      <link rel="icon" type="image/png" href="{{ shop.favicon | image_url: width: 32, height: 32 }}">
+    {% endif %}
+
+    <!-- CSS -->
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ 'rtl.css' | asset_url | stylesheet_tag }}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:title" content="{% if page_title %}{{ page_title }}{% else %}{{ shop.name }}{% endif %}">
+    <meta property="og:description" content="{% if page_description %}{{ page_description }}{% else %}{{ shop.description }}{% endif %}">
+    {% if page.featured_image %}
+      <meta property="og:image" content="{{ page.featured_image | image_url: width: 1200, height: 630 }}">
+    {% elsif product.featured_image %}
+      <meta property="og:image" content="{{ product.featured_image | image_url: width: 1200, height: 630 }}">
+    {% elsif shop.metafields.og.image %}
+      <meta property="og:image" content="{{ shop.metafields.og.image }}">
+    {% endif %}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% if page_title %}{{ page_title }}{% else %}{{ shop.name }}{% endif %}">
+    <meta name="twitter:description" content="{% if page_description %}{{ page_description }}{% else %}{{ shop.description }}{% endif %}">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "{{ shop.name }}",
+        "url": "{{ shop.url }}",
+        "logo": "{{ shop.brand.logo | image_url: width: 250 }}",
+        "description": "{{ shop.description | escape }}"
+      }
+    </script>
+
+    {% if request.page_type == 'product' %}
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org/",
+          "@type": "Product",
+          "name": "{{ product.title }}",
+          "image": "{{ product.featured_image | image_url: width: 1200 }}",
+          "description": "{{ product.description | escape }}",
+          "brand": {
+            "@type": "Brand",
+            "name": "{{ shop.name }}"
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "{{ product.url }}",
+            "priceCurrency": "{{ shop.currency }}",
+            "price": "{{ product.price | money_without_currency }}",
+            "availability": "{% if product.available %}InStock{% else %}OutOfStock{% endif %}"
+          }
+        }
+      </script>
+    {% endif %}
+
+    {{ content_for_header }}
+  </head>
+
+  <body class="{% if shop.locale == 'ar' %}rtl-layout{% endif %}">
+    <!-- Skip to content link -->
+    <a href="#main" class="sr-only">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+    <!-- Header -->
+    {% section 'header' %}
+
+    <!-- Main content -->
+    <main id="main" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    <!-- Footer -->
+    {% section 'footer' %}
+
+    <!-- Exit Intent Popup -->
+    {% section 'exit-intent-popup' %}
+
+    <!-- Cart Drawer -->
+    {% section 'cart-drawer' %}
+
+    <!-- JavaScript -->
+    {{ 'theme.js' | asset_url | script_tag }}
+    
+    <!-- Shopify analytics -->
+    {{ content_for_footer }}
+  </body>
+</html>
