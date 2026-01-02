@@ -52,12 +52,18 @@
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
   .hero-cta:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background: {{ settings.primary_color }};
+  }
+
+  .hero-cta:active {
+    transform: translateY(0);
   }
 
   @media (max-width: 768px) {
