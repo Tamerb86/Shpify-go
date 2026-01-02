@@ -168,13 +168,18 @@
 
 <section class="featured-products">
   <div class="featured-products-header">
-    <h2 class="featured-products-title">{{ section.settings.title }}</h2>
+    <h2 class="featured-products-title">{{ section.settings.title | default: 'Featured Products' }}</h2>
   </div>
 
   <div class="products-grid">
-    {% for product in collections[section.settings.collection].products limit: section.settings.products_count %}
+    {% assign collection_to_show = collections[section.settings.collection] | default: collections.all %}
+    {% for product in collection_to_show.products limit: section.settings.products_count %}
       <div class="product-card">
-        <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.title }}" class="product-image" loading="lazy">
+        {% if product.featured_image %}
+          <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.title }}" class="product-image" loading="lazy">
+        {% else %}
+          <div class="product-image" style="display: flex; align-items: center; justify-content: center; color: #9ca3af;">No Image</div>
+        {% endif %}
         <div class="product-info">
           <h3 class="product-title">{{ product.title }}</h3>
           <p class="product-price">{{ product.price | money }}</p>

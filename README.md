@@ -255,6 +255,14 @@ Recommends products while customer reviews cart.
 
 ## Troubleshooting
 
+### Raw JSON data displaying on page
+If you see raw JSON data like `{"hero_title"...}` on your page:
+- Ensure the theme is properly installed via Shopify Admin (not just uploaded as files)
+- Clear your browser cache and Shopify's theme cache
+- Check that you're viewing the live theme, not the code editor
+- Verify the theme is published (not in preview mode)
+- Refresh the page after making any changes
+
 ### Theme not loading
 - Clear browser cache
 - Try incognito/private mode
