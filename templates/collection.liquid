@@ -1,0 +1,296 @@
+{% stylesheet %}
+  .collection-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .collection-header {
+    margin-bottom: 3rem;
+  }
+
+  .collection-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: {{ settings.text_color }};
+    margin-bottom: 1rem;
+  }
+
+  .collection-description {
+    color: #666;
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .collection-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 2rem;
+  }
+
+  .collection-filters {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .filter-label {
+    font-weight: bold;
+    color: {{ settings.text_color }};
+    font-size: 0.875rem;
+  }
+
+  .filter-select {
+    padding: 0.5rem;
+    border: 1px solid {{ settings.border_color }};
+    border-radius: 4px;
+    font-size: 0.875rem;
+  }
+
+  .sort-select {
+    padding: 0.5rem 1rem;
+    border: 1px solid {{ settings.border_color }};
+    border-radius: 4px;
+    font-size: 0.875rem;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+  }
+
+  .product-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+  }
+
+  .product-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    background: #f3f4f6;
+  }
+
+  .product-info {
+    padding: 1.5rem;
+  }
+
+  .product-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: {{ settings.text_color }};
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .product-price {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: {{ settings.primary_color }};
+    margin-bottom: 1rem;
+  }
+
+  .product-btn {
+    width: 100%;
+    background: {{ settings.primary_color }};
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+
+  .product-btn:hover {
+    background: {{ settings.secondary_color }};
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .pagination a,
+  .pagination span {
+    padding: 0.5rem 1rem;
+    border: 1px solid {{ settings.border_color }};
+    border-radius: 4px;
+    text-decoration: none;
+    color: {{ settings.text_color }};
+    transition: all 0.3s;
+  }
+
+  .pagination a:hover {
+    background: {{ settings.primary_color }};
+    color: white;
+  }
+
+  .pagination .active {
+    background: {{ settings.primary_color }};
+    color: white;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #999;
+  }
+
+  .empty-state-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .collection-controls {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .collection-filters {
+      flex-direction: column;
+    }
+
+    .products-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+
+    .collection-title {
+      font-size: 1.75rem;
+    }
+  }
+{% endstylesheet %}
+
+<div class="collection-page">
+  <!-- Header -->
+  <div class="collection-header">
+    <h1 class="collection-title">{{ collection.title }}</h1>
+    {% if collection.description %}
+      <p class="collection-description">{{ collection.description }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Controls -->
+  <div class="collection-controls">
+    <div class="collection-filters">
+      <div class="filter-group">
+        <label class="filter-label">Price Range</label>
+        <select class="filter-select" onchange="filterByPrice(this.value)">
+          <option value="">All Prices</option>
+          <option value="0-50">Under $50</option>
+          <option value="50-100">$50 - $100</option>
+          <option value="100-200">$100 - $200</option>
+          <option value="200+">Over $200</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Availability</label>
+        <select class="filter-select" onchange="filterByAvailability(this.value)">
+          <option value="">All Products</option>
+          <option value="in-stock">In Stock</option>
+          <option value="out-of-stock">Out of Stock</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">Sort By</label>
+      <select class="sort-select" onchange="sortProducts(this.value)">
+        <option value="featured">Featured</option>
+        <option value="newest">Newest</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+        <option value="best-selling">Best Selling</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Products Grid -->
+  {% if collection.products.size > 0 %}
+    <div class="products-grid">
+      {% for product in collection.products %}
+        <div class="product-card">
+          <a href="{{ product.url }}">
+            <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.title }}" class="product-image" loading="lazy">
+          </a>
+          <div class="product-info">
+            <h3 class="product-title">
+              <a href="{{ product.url }}" style="color: inherit; text-decoration: none;">{{ product.title }}</a>
+            </h3>
+            <p class="product-price">{{ product.price | money }}</p>
+            <form method="post" action="/cart/add">
+              <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+              <button type="submit" class="product-btn">{{ 'product.add_to_cart' | t }}</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if paginate.pages > 1 %}
+      <div class="pagination">
+        {% if paginate.previous %}
+          <a href="{{ paginate.previous.url }}">← Previous</a>
+        {% endif %}
+
+        {% for i in (1..paginate.pages) %}
+          {% if i == paginate.current_page %}
+            <span class="active">{{ i }}</span>
+          {% else %}
+            <a href="{{ collection.url }}?page={{ i }}">{{ i }}</a>
+          {% endif %}
+        {% endfor %}
+
+        {% if paginate.next %}
+          <a href="{{ paginate.next.url }}">Next →</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% else %}
+    <div class="empty-state">
+      <p class="empty-state-title">No products found</p>
+      <p>Try adjusting your filters or search terms</p>
+    </div>
+  {% endif %}
+</div>
+
+<script>
+  function filterByPrice(range) {
+    // Implement price filtering logic
+    console.log('Filter by price:', range);
+  }
+
+  function filterByAvailability(status) {
+    // Implement availability filtering logic
+    console.log('Filter by availability:', status);
+  }
+
+  function sortProducts(sortBy) {
+    // Implement sorting logic
+    console.log('Sort by:', sortBy);
+  }
+</script>

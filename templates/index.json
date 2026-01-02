@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "hero_title": "Power Your Life Wirelessly",
+        "hero_subtitle": "Experience the future of charging with our premium wireless chargers",
+        "hero_cta_text": "Shop Now",
+        "hero_cta_link": "/collections/all"
+      }
+    },
+    "featured_products": {
+      "type": "featured-products",
+      "settings": {
+        "title": "Featured Products",
+        "collection": "all",
+        "products_count": 8
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "featured_products"
+  ]
+}

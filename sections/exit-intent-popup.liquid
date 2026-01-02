@@ -1,0 +1,220 @@
+{% stylesheet %}
+  .exit-intent-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  .exit-intent-overlay.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .exit-intent-popup {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .exit-intent-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #999;
+  }
+
+  .exit-intent-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: {{ settings.text_color }};
+    margin-bottom: 0.5rem;
+  }
+
+  .exit-intent-subtitle {
+    color: #666;
+    margin-bottom: 1.5rem;
+  }
+
+  .exit-intent-discount {
+    background: {{ settings.accent_color }};
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+  }
+
+  .exit-intent-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .exit-intent-input {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+
+  .exit-intent-submit {
+    background: {{ settings.primary_color }};
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .exit-intent-submit:hover {
+    background: {{ settings.secondary_color }};
+  }
+
+  .exit-intent-skip {
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .exit-intent-skip a {
+    color: #999;
+    text-decoration: none;
+    font-size: 0.875rem;
+  }
+{% endstylesheet %}
+
+<div class="exit-intent-overlay" id="exitIntentPopup">
+  <div class="exit-intent-popup">
+    <button class="exit-intent-close" onclick="closeExitIntent()">×</button>
+    
+    <h2 class="exit-intent-title">{{ section.settings.title }}</h2>
+    <p class="exit-intent-subtitle">{{ section.settings.subtitle }}</p>
+    
+    <div class="exit-intent-discount">
+      {{ section.settings.discount_message | replace: '{{ percent }}', section.settings.discount_percent | replace: '{{ code }}', section.settings.discount_code }}
+    </div>
+
+    <form class="exit-intent-form" method="post" action="/contact">
+      <input 
+        type="email" 
+        name="contact[email]" 
+        class="exit-intent-input" 
+        placeholder="{{ 'footer.newsletter' | t }}" 
+        required
+      >
+      <button type="submit" class="exit-intent-submit">{{ section.settings.button_text }}</button>
+    </form>
+
+    <div class="exit-intent-skip">
+      <a href="#" onclick="closeExitIntent(); return false;">{{ section.settings.skip_text }}</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function closeExitIntent() {
+    document.getElementById('exitIntentPopup').classList.remove('active');
+    localStorage.setItem('exitIntentShown', 'true');
+  }
+
+  document.addEventListener('mouseleave', function(e) {
+    if (e.clientY <= 0 && !localStorage.getItem('exitIntentShown')) {
+      document.getElementById('exitIntentPopup').classList.add('active');
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Exit Intent Popup",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Wait! Don't leave yet"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Subscribe to get special offers and updates"
+    },
+    {
+      "type": "text",
+      "id": "discount_message",
+      "label": "Discount Message",
+      "default": "Get {{ percent }}% off with code: {{ code }}"
+    },
+    {
+      "type": "text",
+      "id": "discount_code",
+      "label": "Discount Code",
+      "default": "WELCOME10"
+    },
+    {
+      "type": "range",
+      "id": "discount_percent",
+      "label": "Discount Percentage",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Get Discount"
+    },
+    {
+      "type": "text",
+      "id": "skip_text",
+      "label": "Skip Text",
+      "default": "No thanks, I'll browse"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Exit Intent Popup"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,76 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "انتقل إلى المحتوى"
+    },
+    "meta": {
+      "tags": "الوسوم",
+      "page": "صفحة"
+    }
+  },
+  "header": {
+    "search": "بحث",
+    "cart": "السلة",
+    "account": "الحساب",
+    "menu": "القائمة",
+    "close": "إغلاق",
+    "home": "الرئيسية",
+    "products": "المنتجات"
+  },
+  "home": {
+    "hero_title": "قوّ حياتك لاسلكياً",
+    "hero_subtitle": "اختبر مستقبل الشحن مع شواحننا اللاسلكية المتميزة",
+    "featured_products": "المنتجات المميزة",
+    "shop_all": "تسوق الكل",
+    "view_details": "عرض التفاصيل"
+  },
+  "product": {
+    "add_to_cart": "أضف إلى السلة",
+    "out_of_stock": "غير متوفر",
+    "in_stock": "متوفر",
+    "quantity": "الكمية",
+    "price": "السعر",
+    "description": "الوصف",
+    "specifications": "المواصفات",
+    "reviews": "التقييمات",
+    "bundle_save": "وفّر {{ amount }}%",
+    "buy_bundle": "اشترِ {{ quantity }} وفوّر {{ percent }}%",
+    "urgency_message": "{{ count }} فقط متبقية في المخزون",
+    "free_shipping_message": "أنفق {{ amount }} إضافية للحصول على شحن مجاني"
+  },
+  "cart": {
+    "title": "سلة التسوق",
+    "empty": "سلتك فارغة",
+    "subtotal": "المجموع الفرعي",
+    "shipping": "الشحن",
+    "tax": "الضريبة",
+    "total": "المجموع",
+    "checkout": "الدفع",
+    "continue_shopping": "متابعة التسوق",
+    "remove": "إزالة",
+    "quantity": "الكمية",
+    "free_shipping_threshold": "شحن مجاني على الطلبات فوق {{ amount }}"
+  },
+  "footer": {
+    "about": "حول",
+    "contact": "اتصل",
+    "privacy": "سياسة الخصوصية",
+    "terms": "شروط الخدمة",
+    "returns": "المرتجعات",
+    "shipping": "سياسة الشحن",
+    "faq": "الأسئلة الشائعة",
+    "newsletter": "اشترك في نشرتنا الإخبارية",
+    "follow_us": "تابعنا"
+  },
+  "newsletter": {
+    "title": "لا تفوت الفرصة!",
+    "subtitle": "اشترك للحصول على عروض خاصة وتحديثات",
+    "email_placeholder": "أدخل بريدك الإلكتروني",
+    "subscribe": "اشترك",
+    "discount_message": "احصل على {{ percent }}% خصم برمز: {{ code }}"
+  },
+  "errors": {
+    "404": "الصفحة غير موجودة",
+    "404_message": "الصفحة التي تبحث عنها غير موجودة"
+  }
+}

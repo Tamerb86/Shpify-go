@@ -1,0 +1,194 @@
+/* ============================================
+   RTL (Right-to-Left) Support for Arabic
+   ============================================ */
+
+.rtl-layout {
+  direction: rtl;
+  text-align: right;
+}
+
+.rtl-layout * {
+  direction: rtl;
+}
+
+/* Header RTL */
+.rtl-layout .header {
+  flex-direction: row-reverse;
+}
+
+.rtl-layout .header-left {
+  flex-direction: row-reverse;
+}
+
+.rtl-layout .header-right {
+  flex-direction: row-reverse;
+}
+
+/* Navigation RTL */
+.rtl-layout .nav-menu {
+  flex-direction: row-reverse;
+}
+
+/* Footer RTL */
+.rtl-layout .footer-content {
+  direction: rtl;
+}
+
+.rtl-layout .footer-section {
+  text-align: right;
+}
+
+.rtl-layout .social-links {
+  flex-direction: row-reverse;
+}
+
+/* Forms RTL */
+.rtl-layout input,
+.rtl-layout textarea,
+.rtl-layout select {
+  text-align: right;
+}
+
+/* Cart RTL */
+.rtl-layout .cart-drawer {
+  right: auto;
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.rtl-layout .cart-drawer.active {
+  transform: translateX(0);
+}
+
+.rtl-layout .cart-item {
+  flex-direction: row-reverse;
+}
+
+/* Product Grid RTL */
+.rtl-layout .products-grid {
+  direction: rtl;
+}
+
+/* Hero RTL */
+.rtl-layout .hero-content {
+  text-align: center;
+}
+
+/* Flexbox RTL */
+.rtl-layout .flex {
+  flex-direction: row-reverse;
+}
+
+.rtl-layout .flex-between {
+  flex-direction: row-reverse;
+}
+
+/* Buttons RTL */
+.rtl-layout button,
+.rtl-layout input[type="button"],
+.rtl-layout input[type="submit"] {
+  text-align: center;
+}
+
+/* Text Alignment RTL */
+.rtl-layout .text-right {
+  text-align: left;
+}
+
+.rtl-layout .text-left {
+  text-align: right;
+}
+
+/* Padding/Margin RTL */
+.rtl-layout .pl-1 { padding-left: 0; padding-right: 0.5rem; }
+.rtl-layout .pl-2 { padding-left: 0; padding-right: 1rem; }
+.rtl-layout .pl-3 { padding-left: 0; padding-right: 1.5rem; }
+.rtl-layout .pl-4 { padding-left: 0; padding-right: 2rem; }
+
+.rtl-layout .pr-1 { padding-right: 0; padding-left: 0.5rem; }
+.rtl-layout .pr-2 { padding-right: 0; padding-left: 1rem; }
+.rtl-layout .pr-3 { padding-right: 0; padding-left: 1.5rem; }
+.rtl-layout .pr-4 { padding-right: 0; padding-left: 2rem; }
+
+.rtl-layout .ml-1 { margin-left: 0; margin-right: 0.5rem; }
+.rtl-layout .ml-2 { margin-left: 0; margin-right: 1rem; }
+.rtl-layout .ml-3 { margin-left: 0; margin-right: 1.5rem; }
+.rtl-layout .ml-4 { margin-left: 0; margin-right: 2rem; }
+
+.rtl-layout .mr-1 { margin-right: 0; margin-left: 0.5rem; }
+.rtl-layout .mr-2 { margin-right: 0; margin-left: 1rem; }
+.rtl-layout .mr-3 { margin-right: 0; margin-left: 1.5rem; }
+.rtl-layout .mr-4 { margin-right: 0; margin-left: 2rem; }
+
+/* Border Radius RTL */
+.rtl-layout .rounded-left {
+  border-radius: 0 4px 4px 0;
+}
+
+.rtl-layout .rounded-right {
+  border-radius: 4px 0 0 4px;
+}
+
+/* Animations RTL */
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.rtl-layout .slide-in {
+  animation: slideInFromRight 0.3s ease;
+}
+
+/* Responsive RTL */
+@media (max-width: 768px) {
+  .rtl-layout .header {
+    flex-direction: column;
+  }
+
+  .rtl-layout .nav-menu {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .rtl-layout .cart-drawer {
+    max-width: 100%;
+  }
+}
+
+/* Typography RTL */
+.rtl-layout h1,
+.rtl-layout h2,
+.rtl-layout h3,
+.rtl-layout h4,
+.rtl-layout h5,
+.rtl-layout h6 {
+  text-align: right;
+}
+
+/* Lists RTL */
+.rtl-layout ul,
+.rtl-layout ol {
+  padding-right: 2rem;
+  padding-left: 0;
+}
+
+/* Blockquotes RTL */
+.rtl-layout blockquote {
+  border-right: 4px solid var(--primary-color);
+  border-left: none;
+  padding-right: 1rem;
+  padding-left: 0;
+}

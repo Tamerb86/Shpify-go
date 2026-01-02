@@ -1,0 +1,395 @@
+{% stylesheet %}
+  .product-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .product-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .product-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .product-main-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #f3f4f6;
+  }
+
+  .product-thumbnails {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+  }
+
+  .product-thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+  }
+
+  .product-thumbnail.active {
+    border-color: {{ settings.primary_color }};
+  }
+
+  .product-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: {{ settings.text_color }};
+    margin-bottom: 1rem;
+  }
+
+  .product-rating {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    color: #666;
+  }
+
+  .product-price {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: {{ settings.primary_color }};
+    margin-bottom: 1rem;
+  }
+
+  .product-description {
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .product-options {
+    margin-bottom: 2rem;
+  }
+
+  .option-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .option-label {
+    font-weight: bold;
+    color: {{ settings.text_color }};
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .option-select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid {{ settings.border_color }};
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+
+  .quantity-selector {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .quantity-button {
+    width: 40px;
+    height: 40px;
+    border: 1px solid {{ settings.border_color }};
+    background: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1.25rem;
+  }
+
+  .quantity-input {
+    width: 60px;
+    text-align: center;
+    border: 1px solid {{ settings.border_color }};
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+
+  .add-to-cart-btn {
+    width: 100%;
+    background: {{ settings.primary_color }};
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-bottom: 1rem;
+  }
+
+  .add-to-cart-btn:hover {
+    background: {{ settings.secondary_color }};
+  }
+
+  .buy-now-btn {
+    width: 100%;
+    background: {{ settings.accent_color }};
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .buy-now-btn:hover {
+    background: #059669;
+  }
+
+  .product-details {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid {{ settings.border_color }};
+  }
+
+  .details-tabs {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid {{ settings.border_color }};
+  }
+
+  .details-tab {
+    padding: 1rem 0;
+    cursor: pointer;
+    color: #666;
+    font-weight: bold;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+  }
+
+  .details-tab.active {
+    color: {{ settings.primary_color }};
+    border-bottom-color: {{ settings.primary_color }};
+  }
+
+  .details-content {
+    display: none;
+  }
+
+  .details-content.active {
+    display: block;
+  }
+
+  .urgency-block {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    color: #92400e;
+  }
+
+  .free-shipping-block {
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    color: #166534;
+  }
+
+  @media (max-width: 768px) {
+    .product-container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .product-title {
+      font-size: 1.5rem;
+    }
+
+    .product-main-image {
+      height: 300px;
+    }
+
+    .details-tabs {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+{% endstylesheet %}
+
+<div class="product-page">
+  <div class="product-container">
+    <!-- Product Gallery -->
+    <div class="product-gallery">
+      <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}" class="product-main-image" id="mainImage">
+      
+      <div class="product-thumbnails">
+        {% for image in product.images %}
+          <img 
+            src="{{ image | image_url: width: 100 }}" 
+            alt="{{ product.title }}" 
+            class="product-thumbnail {% if forloop.first %}active{% endif %}"
+            onclick="changeImage('{{ image | image_url: width: 600 }}')"
+          >
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Product Info -->
+    <div class="product-info">
+      <h1 class="product-title">{{ product.title }}</h1>
+
+      {% if product.rating %}
+        <div class="product-rating">
+          <span>★★★★★</span>
+          <span>({{ product.rating }} reviews)</span>
+        </div>
+      {% endif %}
+
+      <div class="product-price">{{ product.price | money }}</div>
+
+      {% if settings.enable_urgency_blocks and product.available %}
+        <div class="urgency-block">
+          Only {{ product.variants.first.inventory_quantity }} left in stock - order soon!
+        </div>
+      {% endif %}
+
+      {% if settings.enable_free_shipping_bar %}
+        <div class="free-shipping-block">
+          Free shipping on orders over {{ settings.free_shipping_threshold | money }}
+        </div>
+      {% endif %}
+
+      <p class="product-description">{{ product.description }}</p>
+
+      <form method="post" action="/cart/add" class="product-form">
+        <!-- Variant Selection -->
+        {% if product.variants.size > 1 %}
+          <div class="product-options">
+            {% for option in product.options_with_values %}
+              <div class="option-group">
+                <label class="option-label">{{ option.name }}</label>
+                <select name="options[{{ option.name }}]" class="option-select" required>
+                  <option value="">Select {{ option.name }}</option>
+                  {% for value in option.values %}
+                    <option value="{{ value }}">{{ value }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <!-- Quantity -->
+        <div class="quantity-selector">
+          <label for="quantity">Quantity:</label>
+          <button type="button" class="quantity-button" onclick="decreaseQuantity()">−</button>
+          <input type="number" id="quantity" name="quantity" value="1" min="1" class="quantity-input">
+          <button type="button" class="quantity-button" onclick="increaseQuantity()">+</button>
+        </div>
+
+        <!-- Hidden variant ID -->
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="variantId">
+
+        <!-- Buttons -->
+        <button type="submit" class="add-to-cart-btn">{{ 'product.add_to_cart' | t }}</button>
+        <button type="button" class="buy-now-btn" onclick="buyNow()">Buy Now</button>
+      </form>
+
+      <!-- Share -->
+      <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid {{ settings.border_color }};">
+        <p style="margin-bottom: 1rem;">Share this product:</p>
+        <div style="display: flex; gap: 1rem;">
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ product.url }}" target="_blank">Facebook</a>
+          <a href="https://twitter.com/intent/tweet?url={{ shop.url }}{{ product.url }}&text={{ product.title }}" target="_blank">Twitter</a>
+          <a href="https://www.pinterest.com/pin/create/button/?url={{ shop.url }}{{ product.url }}&media={{ product.featured_image | image_url: width: 600 }}&description={{ product.title }}" target="_blank">Pinterest</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Details Tabs -->
+  <div class="product-details">
+    <div class="details-tabs">
+      <div class="details-tab active" onclick="switchTab('description')">Description</div>
+      <div class="details-tab" onclick="switchTab('specifications')">Specifications</div>
+      <div class="details-tab" onclick="switchTab('shipping')">Shipping & Returns</div>
+    </div>
+
+    <div id="description" class="details-content active">
+      {{ product.description }}
+    </div>
+
+    <div id="specifications" class="details-content">
+      {% if product.metafields.custom.specifications %}
+        {{ product.metafields.custom.specifications }}
+      {% else %}
+        <p>No specifications available.</p>
+      {% endif %}
+    </div>
+
+    <div id="shipping" class="details-content">
+      <p>Free shipping on orders over {{ settings.free_shipping_threshold | money }}</p>
+      <p>Returns are accepted within 30 days of purchase.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function changeImage(imageUrl) {
+    document.getElementById('mainImage').src = imageUrl;
+  }
+
+  function increaseQuantity() {
+    const input = document.getElementById('quantity');
+    input.value = parseInt(input.value) + 1;
+  }
+
+  function decreaseQuantity() {
+    const input = document.getElementById('quantity');
+    if (parseInt(input.value) > 1) {
+      input.value = parseInt(input.value) - 1;
+    }
+  }
+
+  function switchTab(tabName) {
+    // Hide all tabs
+    document.querySelectorAll('.details-content').forEach(el => {
+      el.classList.remove('active');
+    });
+    document.querySelectorAll('.details-tab').forEach(el => {
+      el.classList.remove('active');
+    });
+
+    // Show selected tab
+    document.getElementById(tabName).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function buyNow() {
+    const form = document.querySelector('.product-form');
+    form.submit();
+    setTimeout(() => {
+      window.location.href = '/checkout';
+    }, 500);
+  }
+</script>
