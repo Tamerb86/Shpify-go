@@ -219,6 +219,7 @@
         "min": 1,
         "max": 100,
         "step": 1,
+        "unit": "%",
         "label": "Discount Percentage",
         "default": 10,
         "info": "Percentage off (1-100)"
