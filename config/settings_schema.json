@@ -1,1 +1,300 @@
-[]
+[
+  {
+    "name": "theme_info",
+    "theme_name": "GoEasyCharge",
+    "theme_version": "1.0.0",
+    "theme_author": "GoEasyCharge Team",
+    "theme_documentation_url": "https://github.com/Tamerb86/Shpify-go",
+    "theme_support_url": "https://github.com/Tamerb86/Shpify-go/issues"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Color Scheme"
+      },
+      {
+        "type": "color",
+        "id": "primary_color",
+        "label": "Primary Color",
+        "default": "#2563eb",
+        "info": "Used for buttons, links, and accent elements"
+      },
+      {
+        "type": "color",
+        "id": "secondary_color",
+        "label": "Secondary Color",
+        "default": "#1e40af",
+        "info": "Used for hover states and secondary elements"
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Accent Color",
+        "default": "#10b981",
+        "info": "Used for highlights and call-to-action elements"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background Color",
+        "default": "#ffffff",
+        "info": "Main background color for the theme"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color",
+        "default": "#1f2937",
+        "info": "Primary text color"
+      },
+      {
+        "type": "color",
+        "id": "border_color",
+        "label": "Border Color",
+        "default": "#e5e7eb",
+        "info": "Color for borders and dividers"
+      }
+    ]
+  },
+  {
+    "name": "Logo & Branding",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Store Logo"
+      },
+      {
+        "type": "text",
+        "id": "store_name",
+        "label": "Store Name",
+        "default": "GoEasyCharge",
+        "info": "Displayed when no logo is uploaded"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo Image",
+        "info": "Recommended size: 200x60px"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 50,
+        "max": 300,
+        "step": 10,
+        "unit": "px",
+        "label": "Logo Width",
+        "default": 150
+      }
+    ]
+  },
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Header Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_search",
+        "label": "Show Search Icon",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_cart",
+        "label": "Show Cart Icon",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_language_switcher",
+        "label": "Enable Language Switcher",
+        "default": true,
+        "info": "Allows customers to switch between Arabic and English"
+      }
+    ]
+  },
+  {
+    "name": "Hero Section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Hero Banner"
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_image",
+        "label": "Hero Image",
+        "info": "Recommended size: 1920x800px"
+      },
+      {
+        "type": "text",
+        "id": "hero_title",
+        "label": "Hero Title",
+        "default": "Power Your Life Wirelessly"
+      },
+      {
+        "type": "textarea",
+        "id": "hero_subtitle",
+        "label": "Hero Subtitle",
+        "default": "Experience the future of charging with our premium wireless chargers"
+      },
+      {
+        "type": "text",
+        "id": "hero_cta_text",
+        "label": "Call to Action Button Text",
+        "default": "Shop Now"
+      },
+      {
+        "type": "url",
+        "id": "hero_cta_link",
+        "label": "Call to Action Button Link",
+        "default": "/collections/all"
+      }
+    ]
+  },
+  {
+    "name": "Conversion Features",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Optimization Features"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_urgency_blocks",
+        "label": "Enable Low Stock Warnings",
+        "default": true,
+        "info": "Shows 'Only X left in stock' messages on product pages"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_free_shipping_bar",
+        "label": "Enable Free Shipping Progress Bar",
+        "default": true,
+        "info": "Shows progress towards free shipping threshold"
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_threshold",
+        "label": "Free Shipping Threshold",
+        "default": "100",
+        "info": "Amount needed for free shipping (without currency symbol)"
+      }
+    ]
+  },
+  {
+    "name": "Newsletter Popup",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Exit Intent Popup"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Popup Title",
+        "default": "Don't Miss Out!"
+      },
+      {
+        "type": "textarea",
+        "id": "subtitle",
+        "label": "Popup Subtitle",
+        "default": "Subscribe to get special offers and updates"
+      },
+      {
+        "type": "text",
+        "id": "discount_code",
+        "label": "Discount Code",
+        "default": "WELCOME10",
+        "info": "The discount code to display"
+      },
+      {
+        "type": "text",
+        "id": "discount_percent",
+        "label": "Discount Percentage",
+        "default": "10",
+        "info": "Just the number, without the % symbol"
+      },
+      {
+        "type": "text",
+        "id": "discount_message",
+        "label": "Discount Message",
+        "default": "Get 10% off with code: WELCOME10"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Subscribe Button Text",
+        "default": "Subscribe Now"
+      },
+      {
+        "type": "text",
+        "id": "skip_text",
+        "label": "Skip Button Text",
+        "default": "No thanks"
+      }
+    ]
+  },
+  {
+    "name": "Featured Products",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Homepage Featured Products"
+      },
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "Product Collection",
+        "info": "Select which collection to display on homepage"
+      },
+      {
+        "type": "range",
+        "id": "products_count",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "label": "Number of Products to Show",
+        "default": 8
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Media Links"
+      },
+      {
+        "type": "url",
+        "id": "facebook_url",
+        "label": "Facebook URL",
+        "info": "Full URL including https://"
+      },
+      {
+        "type": "url",
+        "id": "instagram_url",
+        "label": "Instagram URL",
+        "info": "Full URL including https://"
+      },
+      {
+        "type": "url",
+        "id": "tiktok_url",
+        "label": "TikTok URL",
+        "info": "Full URL including https://"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "WhatsApp Number",
+        "info": "Include country code (e.g., +1234567890)"
+      }
+    ]
+  }
+]
